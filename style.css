@@ -1,0 +1,273 @@
+/* style.css —— 一个文件，控制整个网站的样式 */
+
+/* 1. 基础设置 */
+:root {
+  --ink: #1f2937;
+  --paper: #fbfaf7;
+  --dim: #6b7280;
+  --accent: #c2410c;
+  --accent2: #0369a1;
+  --line: #e5e2dc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--accent2);
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+/* 2. 导航栏 */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+nav .logo {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+nav .links {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+nav .links a {
+  color: #334155;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav .links a:hover,
+nav .links a[aria-current="page"] {
+  color: var(--accent);
+}
+
+nav .action {
+  border: 1.5px solid var(--accent2);
+  color: var(--accent2);
+  border-radius: 99px;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav .action:hover {
+  background: var(--accent2);
+  color: #fff;
+}
+
+.lang-toggle {
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 99px;
+  padding: 0.3em 0.8em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-toggle:hover {
+  background: var(--paper);
+}
+
+/* 3. 主体内容 */
+main {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin: 0 0 0.5em;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 1.8em 0 0.6em;
+  color: var(--accent);
+}
+
+p.lead {
+  font-size: 1.15rem;
+  color: var(--dim);
+  margin: 0 0 1.5em;
+}
+
+/* 4. 首页 hero 区域 */
+.hero {
+  background: linear-gradient(135deg, #fdba74 0%, #c2410c 55%, #7c2d12 100%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0 0 0.3em;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 0 auto 1.2em;
+  max-width: 28rem;
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-block;
+  background: #fff;
+  color: var(--accent);
+  padding: 0.6em 1.2em;
+  border-radius: 99px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: #fff7ed;
+  color: var(--accent);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+/* 5. 名言卡片 */
+.quote {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  margin: 1rem 0;
+  background: #fff;
+}
+
+.quote blockquote {
+  margin: 0 0 0.8em;
+  padding-left: 1rem;
+  border-left: 4px solid var(--accent);
+}
+
+.quote blockquote p {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.quote footer {
+  color: var(--dim);
+  font-size: 0.95rem;
+}
+
+.quote cite {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* 6. 列表 */
+ul, ol, dl {
+  padding-left: 1.2em;
+}
+
+li {
+  margin: 0.4em 0;
+}
+
+dt {
+  font-weight: 700;
+  margin-top: 0.8em;
+  color: var(--ink);
+}
+
+dd {
+  margin-left: 0;
+  color: var(--dim);
+}
+
+/* 7. 页脚 */
+footer.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: var(--dim);
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+footer.site-footer address {
+  font-style: normal;
+  margin-top: 0.3em;
+}
+
+/* 8. 响应式 */
+@media (max-width: 600px) {
+  nav {
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  nav .links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+    gap: 1rem;
+  }
+
+  main {
+    padding: 1.2rem;
+  }
+
+  .hero {
+    padding: 2rem 1.2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}

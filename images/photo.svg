@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#e5e2dc"/>
+  <circle cx="200" cy="160" r="70" fill="#9ca3af"/>
+  <ellipse cx="200" cy="320" rx="110" ry="80" fill="#9ca3af"/>
+  <text x="200" y="380" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#6b7280">李维的照片</text>
+</svg>
