@@ -7,6 +7,7 @@ BiUH Web Technologies 2026 coursework. A 4-page website hand-written with pure H
 - `index.html` — homepage with a hero section and site navigation
 - `quotes.html` — 20 quotes, each with author and source
 - `project.html` — 5 project ideas, target users, and build steps
+- `machine.html` — a minimal interactive "useless machine" page
 - `about.html` — about me and contact
 
 ## Files
@@ -14,6 +15,7 @@ BiUH Web Technologies 2026 coursework. A 4-page website hand-written with pure H
 - `style.css` — one stylesheet for the whole site
 - `nav.html` / `footer.html` — navigation and footer fragments
 - `nav.js` — loads fragments into every page to avoid repetition
+- `machine.js` — interactive logic for the useless machine
 - `favicon.svg` / `apple-touch-icon.png` — site icons
 - `images/` — background and placeholder photo
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine - Li Dongyang</title>
+  <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main>
+    <h1 data-i18n="machineTitle">Useless Machine</h1>
+    <p class="lead" data-i18n="machineLead">A minimal digital toy. It does one thing, and it does it slowly.</p>
+
+    <section class="machine-box" aria-label="Useless machine">
+      <div class="machine-display" id="machine-display">0</div>
+      <p class="machine-label" id="machine-label">The machine is idle.</p>
+
+      <div class="machine-controls">
+        <button class="btn" id="machine-start" type="button">Start</button>
+        <button class="btn btn-secondary" id="machine-reset" type="button">Reset</button>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <h2>What it does</h2>
+      <p>Every time you press Start, the machine counts up to 10, then stops. That is all. No score, no prize, no purpose — just a small digital machine doing its job.</p>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="nav.js"></script>
+  <script src="machine.js"></script>
+</body>
+</html>

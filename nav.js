@@ -16,6 +16,7 @@ const translations = {
     home: 'Home',
     quotes: 'Quotes',
     projects: 'Project Ideas',
+    machine: 'Machine',
     about: 'About',
     contact: 'Contact',
     heroTitle: 'Li Dongyang',
@@ -40,12 +41,15 @@ const translations = {
     mdnText: 'I find most of my technical answers on MDN Web Docs.',
     contactTitle: 'Contact',
     contactText: 'Feel free to email me at dongyang@example.com.',
-    footerText: 'Handwritten by Li Dongyang · Web Technologies 2026'
+    footerText: 'Handwritten by Li Dongyang · Web Technologies 2026',
+    machineTitle: 'Useless Machine',
+    machineLead: 'A minimal digital toy. It does one thing, and it does it slowly.'
   },
   zh: {
     home: '首页',
     quotes: '名言',
     projects: '项目想法',
+    machine: '机器',
     about: '关于',
     contact: '联系我',
     heroTitle: '李冬阳',
@@ -70,7 +74,9 @@ const translations = {
     mdnText: '我大部分技术问题都在 MDN Web Docs 上找答案。',
     contactTitle: '联系我',
     contactText: '欢迎给我发邮件：dongyang@example.com',
-    footerText: '由李冬阳手工编写 · Web Technologies 2026'
+    footerText: '由李冬阳手工编写 · Web Technologies 2026',
+    machineTitle: '无用机器',
+    machineLead: '一个最小的数字玩具。它只做一件事，而且做得很慢。'
   }
 };
 
@@ -92,5 +98,27 @@ document.addEventListener('click', (e) => {
   }
 });
 
+const quotes = [
+  { text: '千里之行，始于足下。', author: 'Laozi · Tao Te Ching' },
+  { text: 'This is for everyone.', author: 'Tim Berners-Lee · 2012' },
+  { text: 'Talk is cheap. Show me the code.', author: 'Linus Torvalds' },
+  { text: '简单是可靠的先决条件。', author: 'Edsger W. Dijkstra' },
+  { text: 'Stay hungry, stay foolish.', author: 'Stewart Brand' },
+  { text: '好的设计是尽可能少的设计。', author: 'Dieter Rams' },
+  { text: '少即是多。', author: 'Ludwig Mies van der Rohe' }
+];
+
+function showRandomQuote() {
+  const hero = document.getElementById('quote-hero');
+  if (!hero) return;
+  const textEl = document.getElementById('random-quote-text');
+  const authorEl = document.getElementById('random-quote-author');
+  const q = quotes[Math.floor(Math.random() * quotes.length)];
+  textEl.querySelector('p').textContent = q.text;
+  authorEl.textContent = q.author;
+}
+
 load('nav.html', 'site-header');
 load('footer.html', 'site-footer');
+
+showRandomQuote();
