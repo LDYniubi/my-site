@@ -1,54 +1,77 @@
-/* style.css —— 一个文件，控制整个网站的样式 */
-
-/* 1. 基础设置 */
+/* style.css —— 高级玻璃拟态 + 多层渐变 */
 :root {
-  --ink: #1f2937;
-  --paper: #fbfaf7;
-  --dim: #6b7280;
-  --accent: #c2410c;
-  --accent2: #0369a1;
-  --line: #e5e2dc;
+  --ink: #e2e8f0;
+  --paper: #0f172a;
+  --dim: #94a3b8;
+  --accent: #f97316;
+  --accent2: #38bdf8;
+  --line: rgba(255,255,255,0.08);
+  --glass: rgba(255,255,255,0.04);
+  --glass-strong: rgba(255,255,255,0.08);
+  --glow: 0 0 40px rgba(249,115,22,0.15);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
   color: var(--ink);
-  background: var(--paper);
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(249,115,22,0.25), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(56,189,248,0.15), transparent),
+    radial-gradient(ellipse 50% 40% at 50% 110%, rgba(168,85,247,0.12), transparent),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+/* 动态背景装饰 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: -1;
 }
 
-a {
-  color: var(--accent2);
-}
+img { max-width: 100%; height: auto; }
 
-a:hover {
-  color: var(--accent);
-}
+a { color: var(--accent2); transition: color 0.2s; }
+a:hover { color: var(--accent); }
 
-/* 2. 导航栏 */
+/* 导航栏 - 玻璃拟态 */
 nav {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--line);
-  background: #fff;
+  background: rgba(15,23,42,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.2);
 }
 
 nav .logo {
   font-weight: 800;
   font-size: 1.2rem;
-  color: var(--accent);
+  background: linear-gradient(135deg, #f97316, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-decoration: none;
 }
 
@@ -61,14 +84,32 @@ nav .links {
 }
 
 nav .links a {
-  color: #334155;
+  color: var(--dim);
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+
+nav .links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #f97316, #38bdf8);
+  transition: width 0.25s;
 }
 
 nav .links a:hover,
 nav .links a[aria-current="page"] {
-  color: var(--accent);
+  color: var(--ink);
+}
+
+nav .links a:hover::after,
+nav .links a[aria-current="page"]::after {
+  width: 100%;
 }
 
 nav .action {
@@ -78,32 +119,39 @@ nav .action {
   padding: 0.3em 1em;
   text-decoration: none;
   font-weight: 500;
+  transition: all 0.25s;
 }
 
 nav .action:hover {
-  background: var(--accent2);
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  border-color: transparent;
   color: #fff;
+  box-shadow: 0 0 20px rgba(56,189,248,0.4);
 }
 
 .lang-toggle {
   border: 1.5px solid var(--line);
-  background: #fff;
+  background: var(--glass);
   color: var(--ink);
   border-radius: 99px;
   padding: 0.3em 0.8em;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.25s;
 }
 
 .lang-toggle:hover {
-  background: var(--paper);
+  background: var(--glass-strong);
+  border-color: var(--accent2);
 }
 
-/* 3. 主体内容 */
+/* 主体内容 */
 main {
   max-width: 48rem;
   margin: 0 auto;
   padding: 2rem;
+  flex: 1;
+  width: 100%;
 }
 
 h1 {
@@ -124,25 +172,48 @@ p.lead {
   margin: 0 0 1.5em;
 }
 
-/* 4. 首页 hero 区域 */
+/* Hero 区域 - 多层渐变 + 光晕 */
 .hero {
-  background: linear-gradient(135deg, #fdba74 0%, #c2410c 55%, #7c2d12 100%);
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 20%, rgba(251,146,60,0.3), transparent),
+    radial-gradient(ellipse 50% 40% at 70% 80%, rgba(56,189,248,0.2), transparent),
+    linear-gradient(135deg, rgba(249,115,22,0.2) 0%, rgba(124,45,18,0.4) 50%, rgba(15,23,42,0.6) 100%);
   color: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 3rem 2rem;
   margin-bottom: 2rem;
   text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: var(--glow), inset 0 1px 0 rgba(255,255,255,0.1);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #f97316, #38bdf8, #a855f7);
+  border-radius: 18px;
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(20px);
 }
 
 .hero h1 {
   font-size: 3rem;
   margin: 0 0 0.3em;
+  background: linear-gradient(135deg, #fff, #fdba74);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero p {
   font-size: 1.2rem;
   margin: 0 auto 1.2em;
   max-width: 28rem;
+  color: rgba(255,255,255,0.85);
 }
 
 .hero-links {
@@ -152,64 +223,91 @@ p.lead {
   justify-content: center;
 }
 
+/* 按钮 - 渐变 + 光效 */
 .btn {
   display: inline-block;
-  background: #fff;
+  background: linear-gradient(135deg, #fff, #f1f5f9);
   color: var(--accent);
   padding: 0.6em 1.2em;
   border-radius: 99px;
   text-decoration: none;
   font-weight: 600;
+  transition: all 0.25s;
+  border: none;
+  cursor: pointer;
 }
 
 .btn:hover {
-  background: #fff7ed;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(249,115,22,0.3);
   color: var(--accent);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255,255,255,0.1);
   color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255,255,255,0.2);
   color: #fff;
+  box-shadow: 0 8px 25px rgba(56,189,248,0.2);
 }
 
-/* 5. 名言卡片 */
+/* 名言 hero - 与首页呼应 */
 .quote-hero {
-  background: linear-gradient(135deg, #fdba74 0%, #c2410c 55%, #7c2d12 100%);
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 20%, rgba(251,146,60,0.25), transparent),
+    radial-gradient(ellipse 50% 40% at 70% 80%, rgba(56,189,248,0.15), transparent),
+    linear-gradient(135deg, rgba(249,115,22,0.15) 0%, rgba(15,23,42,0.5) 100%);
   color: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 2rem;
   margin: 1.5rem 0 2rem;
   text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: var(--glow), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
-.quote-hero blockquote {
-  margin: 0;
-}
-
+.quote-hero blockquote { margin: 0; }
 .quote-hero blockquote p {
   margin: 0;
   font-size: 1.6rem;
   line-height: 1.4;
   font-weight: 600;
+  background: linear-gradient(135deg, #fff, #fdba74);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .quote-hero p {
   margin: 0.6em 0 0;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.7);
   font-size: 0.95rem;
 }
 
+/* 卡片 - 玻璃拟态 */
 .quote {
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1.2rem 1.5rem;
   margin: 1rem 0;
-  background: #fff;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s;
+}
+
+.quote:hover {
+  background: var(--glass-strong);
+  border-color: rgba(249,115,22,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
 }
 
 .quote blockquote {
@@ -235,42 +333,35 @@ p.lead {
   color: var(--ink);
 }
 
-/* 6. 列表 */
-ul, ol, dl {
-  padding-left: 1.2em;
-}
+/* 列表 */
+ul, ol, dl { padding-left: 1.2em; }
+li { margin: 0.4em 0; }
+dt { font-weight: 700; margin-top: 0.8em; color: var(--ink); }
+dd { margin-left: 0; color: var(--dim); }
 
-li {
-  margin: 0.4em 0;
-}
-
-dt {
-  font-weight: 700;
-  margin-top: 0.8em;
-  color: var(--ink);
-}
-
-dd {
-  margin-left: 0;
-  color: var(--dim);
-}
-
-/* 7. 页脚 */
+/* 机器页面 - 科技感 */
 .machine-box {
-  border: 2px solid var(--ink);
-  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
   padding: 2rem;
   margin: 2rem 0;
   text-align: center;
-  background: #fff;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .machine-display {
   font-size: 4rem;
   font-weight: 800;
-  color: var(--accent);
+  background: linear-gradient(135deg, #f97316, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-family: ui-monospace, Menlo, monospace;
   margin: 0.5rem 0;
+  text-shadow: 0 0 40px rgba(249,115,22,0.3);
 }
 
 .machine-label {
@@ -285,17 +376,21 @@ dd {
 }
 
 .machine-controls .btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
+  transform: none;
 }
 
+/* 页脚 - 玻璃拟态 */
 footer.site-footer {
   border-top: 1px solid var(--line);
   padding: 1.5rem 2rem;
   text-align: center;
   color: var(--dim);
   font-size: 0.95rem;
-  background: #fff;
+  background: rgba(15,23,42,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 footer.site-footer address {
@@ -303,7 +398,7 @@ footer.site-footer address {
   margin-top: 0.3em;
 }
 
-/* 8. 响应式 */
+/* 响应式 */
 @media (max-width: 600px) {
   nav {
     flex-wrap: wrap;
@@ -318,15 +413,7 @@ footer.site-footer address {
     gap: 1rem;
   }
 
-  main {
-    padding: 1.2rem;
-  }
-
-  .hero {
-    padding: 2rem 1.2rem;
-  }
-
-  .hero h1 {
-    font-size: 2.2rem;
-  }
+  main { padding: 1.2rem; }
+  .hero { padding: 2rem 1.2rem; }
+  .hero h1 { font-size: 2.2rem; }
 }
